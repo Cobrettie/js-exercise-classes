@@ -85,12 +85,16 @@ class Car {
     return (this.tank += gallons);
   }
   drive(distance) {
-    let gallonsUsed = Math.floor(distance / this.milesPerGallon);
+    let gallonsUsed = distance / this.milesPerGallon;
     let milesAvailable = this.tank * this.milesPerGallon;
-    this.odometer += distance;
-    this.tank -= gallonsUsed;
-
-    return `I ran out of fuel at ${this.odometer} miles!`;
+    if (this.tank >= gallonsUsed) {
+      this.odometer += distance;
+      this.tank -= gallonsUsed;
+    } else {
+      this.odometer += milesAvailable;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`
+    }
   }
 }
 
@@ -144,6 +148,10 @@ class Instructor extends Lambdasian {
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}`;
   }
+  // stretch
+  // individualStudentGrade() {
+  //   return ();
+  // }
 }
 
 /*
@@ -167,6 +175,8 @@ class Student extends Lambdasian {
     this.previousBackground = stuKeys.previousBackground;
     this.className = stuKeys.className;
     this.favSubjects = stuKeys.favSubjects;
+    // stretch 
+    this.grade = Math.floor((Math.random() * 100) +1);
   }
   listSubjects() {
     return `Loving ${this.favSubjects}!`
@@ -177,6 +187,12 @@ class Student extends Lambdasian {
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`;
   }
+  // stretch
+  // graduate() {
+  //   if(this.grade > 70) {
+
+  //   }
+  // }
 }
 
 /*
